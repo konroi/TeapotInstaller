@@ -29,7 +29,7 @@ namespace TeapotInstaller
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
+            this.components = new System.ComponentModel.Container();
             this.metroLabel1 = new MetroFramework.Controls.MetroLabel();
             this.lblLine = new System.Windows.Forms.Label();
             this.cbSelConsole = new MetroFramework.Controls.MetroComboBox();
@@ -37,13 +37,14 @@ namespace TeapotInstaller
             this.label1 = new System.Windows.Forms.Label();
             this.lblStatus = new System.Windows.Forms.Label();
             this.LblConnectionStatus = new System.Windows.Forms.Label();
-            this.button2 = new System.Windows.Forms.Button();
-            this.button1 = new System.Windows.Forms.Button();
+            this.imageList1 = new System.Windows.Forms.ImageList(this.components);
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.btnTpConfig = new System.Windows.Forms.Button();
+            this.btnPlugins = new System.Windows.Forms.Button();
             this.btnReboot = new System.Windows.Forms.Button();
             this.btnSetKVB = new System.Windows.Forms.Button();
             this.btn_repair = new System.Windows.Forms.Button();
             this.btn_install = new System.Windows.Forms.Button();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -125,36 +126,54 @@ namespace TeapotInstaller
             this.LblConnectionStatus.TabIndex = 19;
             this.LblConnectionStatus.Text = "Not Connected";
             // 
-            // button2
+            // imageList1
             // 
-            this.button2.BackgroundImage = global::TeapotInstaller.Properties.Resources.install;
-            this.button2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
-            this.button2.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button2.ForeColor = System.Drawing.Color.Black;
-            this.button2.Location = new System.Drawing.Point(148, 143);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(129, 23);
-            this.button2.TabIndex = 18;
-            this.button2.Text = "Diagnose Issues";
-            this.button2.UseVisualStyleBackColor = true;
+            this.imageList1.ColorDepth = System.Windows.Forms.ColorDepth.Depth8Bit;
+            this.imageList1.ImageSize = new System.Drawing.Size(16, 16);
+            this.imageList1.TransparentColor = System.Drawing.Color.Transparent;
             // 
-            // button1
+            // pictureBox1
             // 
-            this.button1.BackgroundImage = global::TeapotInstaller.Properties.Resources.install;
-            this.button1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
-            this.button1.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button1.ForeColor = System.Drawing.Color.Black;
-            this.button1.Location = new System.Drawing.Point(148, 114);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(129, 23);
-            this.button1.TabIndex = 17;
-            this.button1.Text = "Edit Plugins";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            this.pictureBox1.BackgroundImage = global::TeapotInstaller.Properties.Resources.Teapot;
+            this.pictureBox1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.pictureBox1.Location = new System.Drawing.Point(283, 50);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(121, 116);
+            this.pictureBox1.TabIndex = 20;
+            this.pictureBox1.TabStop = false;
+            // 
+            // btnTpConfig
+            // 
+            this.btnTpConfig.BackgroundImage = global::TeapotInstaller.Properties.Resources.gear;
+            this.btnTpConfig.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.btnTpConfig.Enabled = false;
+            this.btnTpConfig.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnTpConfig.ForeColor = System.Drawing.Color.Black;
+            this.btnTpConfig.Location = new System.Drawing.Point(148, 143);
+            this.btnTpConfig.Name = "btnTpConfig";
+            this.btnTpConfig.Size = new System.Drawing.Size(129, 23);
+            this.btnTpConfig.TabIndex = 18;
+            this.btnTpConfig.Text = "Teapot Config";
+            this.btnTpConfig.UseVisualStyleBackColor = true;
+            this.btnTpConfig.Click += new System.EventHandler(this.btnTpConfig_Click);
+            // 
+            // btnPlugins
+            // 
+            this.btnPlugins.BackgroundImage = global::TeapotInstaller.Properties.Resources.plugin;
+            this.btnPlugins.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.btnPlugins.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnPlugins.ForeColor = System.Drawing.Color.Black;
+            this.btnPlugins.Location = new System.Drawing.Point(148, 114);
+            this.btnPlugins.Name = "btnPlugins";
+            this.btnPlugins.Size = new System.Drawing.Size(129, 23);
+            this.btnPlugins.TabIndex = 17;
+            this.btnPlugins.Text = "Edit Plugins";
+            this.btnPlugins.UseVisualStyleBackColor = true;
+            this.btnPlugins.Click += new System.EventHandler(this.btnPlugins_click);
             // 
             // btnReboot
             // 
-            this.btnReboot.BackgroundImage = global::TeapotInstaller.Properties.Resources.install;
+            this.btnReboot.BackgroundImage = global::TeapotInstaller.Properties.Resources.restart;
             this.btnReboot.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             this.btnReboot.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnReboot.ForeColor = System.Drawing.Color.Black;
@@ -170,6 +189,7 @@ namespace TeapotInstaller
             // 
             this.btnSetKVB.BackgroundImage = global::TeapotInstaller.Properties.Resources.kv;
             this.btnSetKVB.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.btnSetKVB.Enabled = false;
             this.btnSetKVB.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnSetKVB.ForeColor = System.Drawing.Color.Black;
             this.btnSetKVB.Location = new System.Drawing.Point(13, 143);
@@ -207,29 +227,19 @@ namespace TeapotInstaller
             this.btn_install.UseVisualStyleBackColor = true;
             this.btn_install.Click += new System.EventHandler(this.btn_install_Click);
             // 
-            // pictureBox1
-            // 
-            this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
-            this.pictureBox1.Location = new System.Drawing.Point(283, 50);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(121, 116);
-            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pictureBox1.TabIndex = 9;
-            this.pictureBox1.TabStop = false;
-            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(415, 199);
+            this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.LblConnectionStatus);
-            this.Controls.Add(this.button2);
-            this.Controls.Add(this.button1);
+            this.Controls.Add(this.btnTpConfig);
+            this.Controls.Add(this.btnPlugins);
             this.Controls.Add(this.btnReboot);
             this.Controls.Add(this.btnSetKVB);
             this.Controls.Add(this.btn_repair);
             this.Controls.Add(this.btn_install);
-            this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.lblStatus);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.metroLabel2);
@@ -238,7 +248,8 @@ namespace TeapotInstaller
             this.Controls.Add(this.metroLabel1);
             this.ForeColor = System.Drawing.Color.Red;
             this.MaximizeBox = false;
-            this.MinimumSize = new System.Drawing.Size(294, 198);
+            this.MaximumSize = new System.Drawing.Size(415, 199);
+            this.MinimumSize = new System.Drawing.Size(415, 199);
             this.Name = "Form1";
             this.Load += new System.EventHandler(this.Form1_Load);
             this.Paint += new System.Windows.Forms.PaintEventHandler(this.Form1_Paint);
@@ -252,18 +263,19 @@ namespace TeapotInstaller
 
         private MetroFramework.Controls.MetroLabel metroLabel1;
         private System.Windows.Forms.Label lblLine;
-        private MetroFramework.Controls.MetroComboBox cbSelConsole;
         private MetroFramework.Controls.MetroLabel metroLabel2;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label lblStatus;
-        private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.Button btn_install;
         private System.Windows.Forms.Button btn_repair;
         private System.Windows.Forms.Button btnSetKVB;
         private System.Windows.Forms.Button btnReboot;
-        private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.Button btnPlugins;
+        private System.Windows.Forms.Button btnTpConfig;
         private System.Windows.Forms.Label LblConnectionStatus;
+        private System.Windows.Forms.ImageList imageList1;
+        private System.Windows.Forms.PictureBox pictureBox1;
+        public MetroFramework.Controls.MetroComboBox cbSelConsole;
     }
 }
 

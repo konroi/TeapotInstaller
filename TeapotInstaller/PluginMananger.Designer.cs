@@ -112,9 +112,9 @@
             this.metroLabel4.FontWeight = MetroFramework.MetroLabelWeight.Bold;
             this.metroLabel4.Location = new System.Drawing.Point(12, 13);
             this.metroLabel4.Name = "metroLabel4";
-            this.metroLabel4.Size = new System.Drawing.Size(240, 19);
+            this.metroLabel4.Size = new System.Drawing.Size(232, 19);
             this.metroLabel4.TabIndex = 5;
-            this.metroLabel4.Text = "Teapot Installer - Plugin Mananger";
+            this.metroLabel4.Text = "Teapot Installer - Plugin Manager";
             this.metroLabel4.Click += new System.EventHandler(this.metroLabel4_Click);
             // 
             // metroLabel5
@@ -276,6 +276,7 @@
             this.btnSave.TabIndex = 14;
             this.btnSave.Text = "Save";
             this.btnSave.UseSelectable = true;
+            this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
             // 
             // btnCancel
             // 
@@ -285,6 +286,7 @@
             this.btnCancel.TabIndex = 15;
             this.btnCancel.Text = "Cancel";
             this.btnCancel.UseSelectable = true;
+            this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
             // 
             // PluginMananger
             // 

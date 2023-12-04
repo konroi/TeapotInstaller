@@ -13,8 +13,7 @@ namespace TeapotInstaller
 {
     class Downloader
     {
-        public string tempPath = string.Empty;
-        public string[] files = { "xbdm.xex", "Teapot.ini", "launch.ini", "TeapotCE.ini", "Teapot.xex" };
+        public string[] files = { "xbdm.xex", "JRPC2.xex", "JRPC.ini", "Teapot.ini", "launch.ini", "TeapotCE.ini", "Teapot.xex" };
         public string ZipName = "TeapotLive3.1.zip";
         public bool S_SUCCESS = false;
         public Exception Ex;
@@ -26,7 +25,7 @@ namespace TeapotInstaller
 
         private bool GetFileBytesFromZip() {
             try{
-                using (ZipFile zip = new ZipFile(tempPath + ZipName)){
+                using (ZipFile zip = new ZipFile(Definitions.STR_TEMPPATH + ZipName)){
                     foreach (ZipEntry e in zip){
                         if (!files.Contains(Path.GetFileName(e.Name))) continue;
                         Console.WriteLine("{0}", Path.GetFileName(e.Name));
@@ -36,11 +35,11 @@ namespace TeapotInstaller
                             Stream stream = zip.GetInputStream(ze);
                             byte[] data = new byte[ze.Size];
                             stream.Read(data, 0, data.Length);
-                            File.WriteAllBytes(tempPath + Path.GetFileName(e.Name), data);
+                            File.WriteAllBytes(Definitions.STR_TEMPPATH + Path.GetFileName(e.Name), data);
                         }
                     }
                 }
-                File.Delete(tempPath + ZipName);
+                File.Delete(Definitions.STR_TEMPPATH + ZipName);
                 return true;
             }catch(Exception e){
                 Ex = e;
@@ -50,7 +49,8 @@ namespace TeapotInstaller
         private bool GetTeapotArchive() {
             try{
                 using (var client = new WebClient()){
-                    client.DownloadFile("https://teapotlive.us/DL/Teapotv3.1.zip", tempPath + ZipName);
+                    Random rand = new Random();
+                    client.DownloadFile("https://teapotlive.us/DL/Teapotv3.1.zip?cb=" + rand.Next(0, 9999), $"{ Definitions.STR_TEMPPATH}{ZipName}");
                 }
                 return true;
             }catch(Exception e){
@@ -61,8 +61,9 @@ namespace TeapotInstaller
 
         private void Install()
         {
-            Directory.CreateDirectory(Path.GetTempPath() + "Teapot");
-            this.tempPath = $"{Path.GetTempPath()}Teapot\\";
+            Directory.CreateDirectory(Definitions.STR_TEMPPATH);
+            Directory.CreateDirectory($"{Definitions.STR_TEMPPATH}Dat\\");
+
             if (GetTeapotArchive() && GetFileBytesFromZip()){
                this.S_SUCCESS = true;
                 return;

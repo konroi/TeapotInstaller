@@ -12,7 +12,14 @@ namespace TeapotInstaller
         public static string STR_SYSPATH = "\\Device\\Harddisk0\\Partition";
         public static string STR_HDD = "HDD:\\";
         public static string STR_TEAPOT = "Teapot:\\";
-        public static string STR_TEMPPATH = string.Format("{0}Teapot", Path.GetTempPath());
+        public static string STR_TEMPPATH = string.Format("{0}Teapot\\", Path.GetTempPath());
+        public static string STR_TEMPPATHDAT = string.Format("{0}Teapot\\Dat\\", Path.GetTempPath());
+
+        public const int CONNECTION_CONNECTED = 0x0,
+            CONNECTION_NOCONNECT = 0x1,
+            CONNECTION_REBOOTING = 0x2,
+            CONNECTION_FAILED = 0x3,
+            CONNECTION_PROGRESS = 0x4;
 
         public static int HalHaltRoutine = 0x0, // hard poweroff (used by hotplug HDD) HalpPowerDownSystemNow
         HalRebootRoutine = 0x1, // hard reset (video error) HalpRebootSystem

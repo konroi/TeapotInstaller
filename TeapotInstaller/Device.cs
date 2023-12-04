@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using XDevkit;
 using System.IO;
+using System.Drawing;
 
 namespace TeapotInstaller
 {
@@ -22,7 +23,7 @@ namespace TeapotInstaller
         {
             this.Handle = null;
             this.Name = DeviceName;
-            this.HResult = -1;
+            this.HResult = Definitions.CONNECTION_NOCONNECT;
             this.LastException = null;
         }
 
@@ -50,6 +51,21 @@ namespace TeapotInstaller
         public void LaunchTitle(string path)
         {
             Handle.Reboot(path, Path.GetDirectoryName(path), null, XboxRebootFlags.Title);
+        }
+
+        public void Reboot()
+        {
+            Form1 form = new Form1();
+
+            Handle.Reboot(null, null, null, XboxRebootFlags.Cold);
+
+            for (int i = 0; i < 10; i++){
+                form.ConnectDevice(form.SelectedDeviceIndex, true);
+                if (form.ConnectionStatus == Definitions.CONNECTION_CONNECTED){
+                    Console.WriteLine("ffs");
+                    return;
+                }
+            }
         }
     }
 }

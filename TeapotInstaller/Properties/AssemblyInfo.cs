@@ -6,9 +6,9 @@ using System.Runtime.InteropServices;
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
 [assembly: AssemblyTitle("TeapotInstaller")]
-[assembly: AssemblyDescription("")]
+[assembly: AssemblyDescription("Teapot Live Installer &  Management Tool")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("")]
+[assembly: AssemblyCompany("Teapot Live")]
 [assembly: AssemblyProduct("TeapotInstaller")]
 [assembly: AssemblyCopyright("Copyright ©  2023")]
 [assembly: AssemblyTrademark("")]
