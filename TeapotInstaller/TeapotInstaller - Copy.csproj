@@ -238,13 +238,6 @@
       <Install>false</Install>
     </BootstrapperPackage>
   </ItemGroup>
-  <ItemGroup>
-    <PackageReference Include="ILMerge" Version="3.0.41" />
-  </ItemGroup>
-  <Target Name="ILMerge">
-    <!-- the ILMergePath property points to the location of ILMerge.exe console application -->
-    <Exec Command="$(ILMergeConsolePath) bin\Release\TeapotInstaller.exe  /out:Teapot-Tool.exe bin\Release\DotNetZip.dll bin\Release\MetroFramework.Design.dll bin\Release\MetroFramework.dll bin\Release\MetroFramework.Fonts.dll" />
-  </Target>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>
@@ -252,7 +245,4 @@
     </PropertyGroup>
     <Error Condition="!Exists('..\packages\ILMerge.3.0.41\build\ILMerge.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\ILMerge.3.0.41\build\ILMerge.props'))" />
   </Target>
-  <PropertyGroup>
-    <PostBuildEvent>$(ILMergeConsolePath) "$(TargetDir)TeapotInstaller.exe" /out:"$(TargetDir)Teapot-Tool.exe" "$(TargetDir)DotNetZip.dll" "$(TargetDir)MetroFramework.Design.dll" "$(TargetDir)\MetroFramework.dll" "$(TargetDir)MetroFramework.Fonts.dll" "$(TargetDir)ICSharpCode.SharpZipLib.dll"</PostBuildEvent>
-  </PropertyGroup>
 </Project>

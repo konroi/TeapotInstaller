@@ -30,6 +30,7 @@ namespace TeapotInstaller
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.metroLabel1 = new MetroFramework.Controls.MetroLabel();
             this.lblLine = new System.Windows.Forms.Label();
             this.cbSelConsole = new MetroFramework.Controls.MetroComboBox();
@@ -54,9 +55,9 @@ namespace TeapotInstaller
             this.metroLabel1.FontWeight = MetroFramework.MetroLabelWeight.Bold;
             this.metroLabel1.Location = new System.Drawing.Point(12, 13);
             this.metroLabel1.Name = "metroLabel1";
-            this.metroLabel1.Size = new System.Drawing.Size(112, 19);
+            this.metroLabel1.Size = new System.Drawing.Size(262, 19);
             this.metroLabel1.TabIndex = 0;
-            this.metroLabel1.Text = "Teapot Installer";
+            this.metroLabel1.Text = "Teapot Tool and Installer - v1.0.0 Beta";
             this.metroLabel1.Click += new System.EventHandler(this.metroLabel1_Click);
             // 
             // lblLine
@@ -247,6 +248,7 @@ namespace TeapotInstaller
             this.Controls.Add(this.lblLine);
             this.Controls.Add(this.metroLabel1);
             this.ForeColor = System.Drawing.Color.Red;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
             this.MaximumSize = new System.Drawing.Size(415, 199);
             this.MinimumSize = new System.Drawing.Size(415, 199);

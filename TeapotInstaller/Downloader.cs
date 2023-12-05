@@ -13,21 +13,26 @@ namespace TeapotInstaller
 {
     class Downloader
     {
-        public string[] files = { "xbdm.xex", "JRPC2.xex", "JRPC.ini", "Teapot.ini", "launch.ini", "TeapotCE.ini", "Teapot.xex" };
+        public string[] FilesPreset = { "xbdm.xex", "JRPC2.xex", "JRPC.ini", "Teapot.ini", "launch.ini", "TeapotCE.ini", "Teapot.xex" };
         public string ZipName = "TeapotLive3.1.zip";
         public bool S_SUCCESS = false;
         public Exception Ex;
 
-        public Downloader()
+        public Downloader(string SingleFile = null)
         {
-            Install();
+            Install(SingleFile);
         }
 
-        private bool GetFileBytesFromZip() {
+        private bool GetFileBytesFromZip(string singleFile = null) {
             try{
                 using (ZipFile zip = new ZipFile(Definitions.STR_TEMPPATH + ZipName)){
                     foreach (ZipEntry e in zip){
-                        if (!files.Contains(Path.GetFileName(e.Name))) continue;
+                        if (singleFile == null){
+                            if (!FilesPreset.Contains(Path.GetFileName(e.Name))) continue;
+                        }else{
+                            if (!singleFile.Contains(Path.GetFileName(e.Name))) continue;
+                        }
+
                         Console.WriteLine("{0}", Path.GetFileName(e.Name));
 
                         ZipEntry ze = zip.GetEntry(e.Name);
@@ -59,12 +64,9 @@ namespace TeapotInstaller
             }
         }
 
-        private void Install()
-        {
-            Directory.CreateDirectory(Definitions.STR_TEMPPATH);
-            Directory.CreateDirectory($"{Definitions.STR_TEMPPATH}Dat\\");
-
-            if (GetTeapotArchive() && GetFileBytesFromZip()){
+        private void Install(string SingleFile)
+        { 
+            if (GetTeapotArchive() && GetFileBytesFromZip(SingleFile)){
                this.S_SUCCESS = true;
                 return;
             }

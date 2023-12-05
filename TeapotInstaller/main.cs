@@ -16,8 +16,6 @@ using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace TeapotInstaller
 {
-
-
     public partial class Form1 : MetroForm
     {
         Thread RebootEvent;
@@ -66,8 +64,8 @@ namespace TeapotInstaller
         {
                 while (true)
                 {
-                if (UpdateStatus(ConnectionStatus)) return;
-                    Thread.Sleep(3000);
+                if (!UpdateStatus(ConnectionStatus)) return;
+                    Thread.Sleep(7000);
                 }
             }
 
@@ -80,7 +78,7 @@ namespace TeapotInstaller
                 //btnSetKVB.Enabled = state;
                 btnPlugins.Enabled = state;
                 btnReboot.Enabled = state;
-                btnTpConfig.Enabled = true;
+                btnTpConfig.Enabled = state;
             });
         }
 
@@ -105,16 +103,16 @@ namespace TeapotInstaller
             int result = await CurDevice.ConnectAsync();
             Console.WriteLine($"Status: {ConnectionStatus.ToString("X8")} || Name: {CurDevice.Name}");
 
-            if (result == 0x00){
-                UpdateStatus(Definitions.CONNECTION_CONNECTED);
-            }
-            else{
-                UpdateStatus(Definitions.CONNECTION_FAILED);
-            }
+            if (result == 0x00) UpdateStatus(Definitions.CONNECTION_CONNECTED);
+            else if (!waitingReboot) UpdateStatus(Definitions.CONNECTION_FAILED);
         }
 
-            private async void Form1_Load(object sender, EventArgs e)
-        {
+       private async void Form1_Load(object sender, EventArgs e)
+       {
+            Directory.CreateDirectory(Definitions.STR_TEMPPATH);
+            Directory.CreateDirectory($"{Definitions.STR_TEMPPATH}Dat\\");
+            Console.WriteLine($"Temp Path: {Definitions.STR_TEMPPATH}");
+
             for (int i = 0; i < cbSelConsole.Items.Count; i++)
             {
                 if (cbSelConsole.Items[i].ToString() == Default_Console)
@@ -151,7 +149,7 @@ namespace TeapotInstaller
                 return;
             }
 
-            foreach (string file in downloader.files){
+            foreach (string file in downloader.FilesPreset){
                 CurDevice.Handle.SendFile($"{Definitions.STR_TEMPPATH}{file}", $"{Definitions.STR_HDD}{file}");
             }
 
@@ -225,6 +223,7 @@ namespace TeapotInstaller
             for (int i = 0; i < 10; i++)
             {
                 await ConnectDevice(SelectedDeviceIndex, true);
+                await Task.Delay(3000);
                 if (ConnectionStatus == Definitions.CONNECTION_CONNECTED){
                     return;
                 }

@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(PluginMananger));
             this.metroLabel1 = new MetroFramework.Controls.MetroLabel();
             this.metroLabel2 = new MetroFramework.Controls.MetroLabel();
             this.tbPlugin1 = new MetroFramework.Controls.MetroTextBox();
@@ -40,8 +41,8 @@
             this.tbPlugin3 = new MetroFramework.Controls.MetroTextBox();
             this.tbPlugin4 = new MetroFramework.Controls.MetroTextBox();
             this.tbPlugin5 = new MetroFramework.Controls.MetroTextBox();
-            this.btnSave = new MetroFramework.Controls.MetroButton();
-            this.btnCancel = new MetroFramework.Controls.MetroButton();
+            this.btnCancel = new System.Windows.Forms.Button();
+            this.btnSave = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // metroLabel1
@@ -112,9 +113,9 @@
             this.metroLabel4.FontWeight = MetroFramework.MetroLabelWeight.Bold;
             this.metroLabel4.Location = new System.Drawing.Point(12, 13);
             this.metroLabel4.Name = "metroLabel4";
-            this.metroLabel4.Size = new System.Drawing.Size(232, 19);
+            this.metroLabel4.Size = new System.Drawing.Size(115, 19);
             this.metroLabel4.TabIndex = 5;
-            this.metroLabel4.Text = "Teapot Installer - Plugin Manager";
+            this.metroLabel4.Text = "Plugin Manager";
             this.metroLabel4.Click += new System.EventHandler(this.metroLabel4_Click);
             // 
             // metroLabel5
@@ -268,25 +269,31 @@
             this.tbPlugin5.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
             this.tbPlugin5.WaterMarkFont = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel);
             // 
-            // btnSave
-            // 
-            this.btnSave.Location = new System.Drawing.Point(13, 212);
-            this.btnSave.Name = "btnSave";
-            this.btnSave.Size = new System.Drawing.Size(75, 23);
-            this.btnSave.TabIndex = 14;
-            this.btnSave.Text = "Save";
-            this.btnSave.UseSelectable = true;
-            this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
-            // 
             // btnCancel
             // 
-            this.btnCancel.Location = new System.Drawing.Point(94, 212);
+            this.btnCancel.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.btnCancel.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnCancel.ForeColor = System.Drawing.Color.Black;
+            this.btnCancel.Location = new System.Drawing.Point(78, 212);
             this.btnCancel.Name = "btnCancel";
-            this.btnCancel.Size = new System.Drawing.Size(75, 23);
-            this.btnCancel.TabIndex = 15;
+            this.btnCancel.Size = new System.Drawing.Size(59, 23);
+            this.btnCancel.TabIndex = 43;
             this.btnCancel.Text = "Cancel";
-            this.btnCancel.UseSelectable = true;
+            this.btnCancel.UseVisualStyleBackColor = true;
             this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
+            // 
+            // btnSave
+            // 
+            this.btnSave.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.btnSave.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnSave.ForeColor = System.Drawing.Color.Black;
+            this.btnSave.Location = new System.Drawing.Point(13, 212);
+            this.btnSave.Name = "btnSave";
+            this.btnSave.Size = new System.Drawing.Size(59, 23);
+            this.btnSave.TabIndex = 42;
+            this.btnSave.Text = "Save";
+            this.btnSave.UseVisualStyleBackColor = true;
+            this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
             // 
             // PluginMananger
             // 
@@ -307,6 +314,7 @@
             this.Controls.Add(this.tbPlugin1);
             this.Controls.Add(this.metroLabel2);
             this.Controls.Add(this.metroLabel1);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "PluginMananger";
             this.Load += new System.EventHandler(this.PluginMananger_Load);
             this.ResumeLayout(false);
@@ -328,7 +336,7 @@
         private MetroFramework.Controls.MetroTextBox tbPlugin3;
         private MetroFramework.Controls.MetroTextBox tbPlugin4;
         private MetroFramework.Controls.MetroTextBox tbPlugin5;
-        private MetroFramework.Controls.MetroButton btnSave;
-        private MetroFramework.Controls.MetroButton btnCancel;
+        private System.Windows.Forms.Button btnCancel;
+        private System.Windows.Forms.Button btnSave;
     }
 }
