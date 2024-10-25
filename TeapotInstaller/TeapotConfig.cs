@@ -30,12 +30,36 @@ namespace TeapotInstaller
             Setup();
         }
 
+        private void UpdateConfigFile()
+        {
+            
+            DialogResult msgResult = MessageBox.Show("Would you like to update it now?", "Teapot Installer - You have an outdated Teapot.ini", MessageBoxButtons.YesNo);
+            if (msgResult == DialogResult.Yes){
+                downloader = new Downloader("Teapot.ini");
+                if (downloader.S_SUCCESS){
+                    CurDevice.Handle.SendFile($"{Definitions.STR_TEMPPATH}Teapot.ini", $"{Definitions.STR_HDD}Teapot.ini");
+                    Setup();
+                } else MessageBox.Show("Unable to reach TeapotLive web services. Please try again.");
+            }else if (msgResult == DialogResult.No) this.BeginInvoke(new MethodInvoker(this.Close));
+        }
+
         private void Setup()
         {
             try
             {
-                rbYourKV.Checked = !rbNandKV.Checked || !rbNoKVMode.Checked;
+                rbYourKV.Checked = !rbNandKV.Checked && !rbNoKVMode.Checked;
                 CurDevice.Handle.ReceiveFile($"{Definitions.STR_TEMPPATHDAT}\\Teapot.ini", $"{Definitions.STR_HDD}Teapot.ini");
+
+                string ConfigVersion = MyIni.Read("ConfigVersion", "Diagnostic");
+                if (string.IsNullOrEmpty(ConfigVersion) || ConfigVersion != "2.0.7")
+                {
+                    UpdateConfigFile();
+                    this.Close();
+                    return;
+                }
+
+                Console.WriteLine($"Config file version: {ConfigVersion}");
+                
                 rbNoKVMode.Checked = bool.Parse(MyIni.Read("NoKVMode", "Settings"));
                 rbNandKV.Checked = bool.Parse(MyIni.Read("UseNandKV", "Settings"));
                 cbOffline.Checked = bool.Parse(MyIni.Read("Offline", "Settings"));
@@ -61,15 +85,7 @@ namespace TeapotInstaller
                 valFanSpeed.Value = FanSpeed < 50 ? 50 : FanSpeed;
 
             }catch (Exception ex){
-                downloader = new Downloader("Teapot.ini");
-                if (downloader.S_SUCCESS != true){
-                    DialogResult msgResult = MessageBox.Show("Would you like to update it now?", "Teapot Installer - You have an outdated Teapot.ini", MessageBoxButtons.YesNo);
-
-                    if (msgResult == DialogResult.Yes){
-                        CurDevice.Handle.SendFile($"{Definitions.STR_TEMPPATH}Teapot.ini", $"{Definitions.STR_HDD}Teapot.ini");
-                        Setup();
-                    }else if (msgResult == DialogResult.No) this.BeginInvoke(new MethodInvoker(this.Close));
-                }
+                UpdateConfigFile();
 
             }
         }
@@ -86,19 +102,19 @@ namespace TeapotInstaller
 
         private void btnSave_Click(object sender, EventArgs e)
         {
-            MyIni.Write("NoKVMode", rbNoKVMode.Checked.ToString(), "Settings");
-            MyIni.Write("UseNandKV", rbNandKV.Checked.ToString(), "Settings");
-            MyIni.Write("TeapotEngine", cbEngine.Checked.ToString(), "Settings");
-            MyIni.Write("CustomUI", cbUI.Checked.ToString(), "Settings");
-            MyIni.Write("Offline", cbOffline.Checked.ToString(), "Settings");
-            MyIni.Write("Fanspeed", valFanSpeed.Value.ToString(), "Settings");
-            MyIni.Write("LegacyEngines", cbLegacyEngines.Checked.ToString(), "Settings");
-            MyIni.Write("OnhostMenus", cbOnHost.Checked.ToString(), "Settings");
+            MyIni.Write("NoKVMode", " " + rbNoKVMode.Checked.ToString().ToLower(), "Settings");
+            MyIni.Write("UseNandKV", " " + rbNandKV.Checked.ToString().ToLower(), "Settings");
+            MyIni.Write("TeapotEngine", " " + cbEngine.Checked.ToString().ToLower(), "Settings");
+            MyIni.Write("CustomUI", " " + cbUI.Checked.ToString().ToLower(), "Settings");
+            MyIni.Write("Offline", " " + cbOffline.Checked.ToString().ToLower(), "Settings");
+            MyIni.Write("Fanspeed", " " + valFanSpeed.Value.ToString().ToLower(), "Settings");
+            MyIni.Write("LegacyEngines", " " + cbLegacyEngines.Checked.ToString().ToLower(), "Settings");
+            MyIni.Write("OnhostMenus", " " + cbOnHost.Checked.ToString().ToLower(), "Settings");
 
-            MyIni.Write("AdvancedWarfare", cbBypassAW.Checked.ToString(), "Bypasses");
-            MyIni.Write("Ghosts", cbBypassGhosts.Checked.ToString(), "Bypasses");
-            MyIni.Write("Bo2", cbBypassBo2.Checked.ToString(), "Bypasses");
-            MyIni.Write("Bo3", cbBypassBo3.Checked.ToString(), "Bypasses");
+            MyIni.Write("AdvancedWarfare", " " + cbBypassAW.Checked.ToString().ToLower(), "Bypasses");
+            MyIni.Write("Ghosts", " " + cbBypassGhosts.Checked.ToString().ToLower(), "Bypasses");
+            MyIni.Write("Bo2", " " + cbBypassBo2.Checked.ToString().ToLower(), "Bypasses");
+            MyIni.Write("Bo3", " " + cbBypassBo3.Checked.ToString().ToLower(), "Bypasses");
 
             CurDevice.Handle.SendFile($"{Definitions.STR_TEMPPATHDAT}\\Teapot.ini", $"{Definitions.STR_HDD}Teapot.ini");
             this.Close();

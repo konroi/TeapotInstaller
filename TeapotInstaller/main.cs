@@ -65,7 +65,7 @@ namespace TeapotInstaller
                 while (true)
                 {
                 if (!UpdateStatus(ConnectionStatus)) return;
-                    Thread.Sleep(7000);
+                    Thread.Sleep(1000);
                 }
             }
 
@@ -218,16 +218,16 @@ namespace TeapotInstaller
             ConnectionStatus = Definitions.CONNECTION_REBOOTING;
             CurDevice.Handle.Reboot(null, null, null, XboxRebootFlags.Cold);
 
-
             new Thread(() => StatusChangeEvent()).Start();
-            for (int i = 0; i < 10; i++)
+            for (int i = 0; i < 30; i++)
             {
+                Thread.Sleep(2000);
                 await ConnectDevice(SelectedDeviceIndex, true);
-                await Task.Delay(3000);
-                if (ConnectionStatus == Definitions.CONNECTION_CONNECTED){
+                if (ConnectionStatus == Definitions.CONNECTION_CONNECTED)
+                {
                     return;
                 }
             }
+            }
         }
-    }
 }
