@@ -23,14 +23,14 @@ namespace TeapotInstaller
             Install(SingleFile);
         }
 
-        private bool GetFileBytesFromZip(string singleFile = null) {
+        public bool GetFileBytesFromZip(string singleFile = null) {
             try{
                 using (ZipFile zip = new ZipFile(Definitions.STR_TEMPPATH + ZipName)){
                     foreach (ZipEntry e in zip){
                         if (singleFile == null){
                             if (!FilesPreset.Contains(Path.GetFileName(e.Name))) continue;
                         }else{
-                            if (!singleFile.Contains(Path.GetFileName(e.Name))) continue;
+                            if (Path.GetFileName(e.Name) != singleFile) continue;
                         }
 
                         Console.WriteLine("{0}", Path.GetFileName(e.Name));
@@ -55,7 +55,7 @@ namespace TeapotInstaller
             try{
                 using (var client = new WebClient()){
                     Random rand = new Random();
-                    client.DownloadFile("https://teapotlive.us/DL/Teapotv3.1.zip?cb=" + rand.Next(0, 9999), $"{ Definitions.STR_TEMPPATH}{ZipName}");
+                    client.DownloadFile("https://teapotlive.us/DL/TeapotLive.zip?cb=" + rand.Next(0, 9999), $"{ Definitions.STR_TEMPPATH}{ZipName}");
                 }
                 return true;
             }catch(Exception e){
