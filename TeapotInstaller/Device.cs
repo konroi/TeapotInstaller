@@ -33,11 +33,10 @@ namespace TeapotInstaller
             this.Handle.ConnectTimeout = 1;
 
             this.debugTarget = this.Handle.DebugTarget;
-            //this.debugTarget.ConnectAsDebugger("XTool", XboxDebugConnectFlags.Force);
 
             try
             {
-                await Task.Run(() => this.Handle.FindConsole(1, 0));
+                await Task.Run(() => this.Handle.FindConsole(60, 1000));
                 this.HResult = 0;
             }
             catch (Exception Ex)
@@ -60,6 +59,7 @@ namespace TeapotInstaller
             Handle.Reboot(null, null, null, XboxRebootFlags.Cold);
 
             for (int i = 0; i < 10; i++){
+                Console.WriteLine("Attempting to connect...");
                 form.ConnectDevice(form.SelectedDeviceIndex, true);
                 if (form.ConnectionStatus == Definitions.CONNECTION_CONNECTED){
                     Console.WriteLine("ffs");
