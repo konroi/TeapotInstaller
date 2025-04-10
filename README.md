@@ -14,8 +14,10 @@ I will add the latest compiled executable to the repo (Last Built: 04/10/2025)
 Try using the "Repair Install" option, to cleanly refresh all your files. 
 
 **Auto Teapot Config Updater:**
-Teapot-Tool will automatically update your device with the latest up to date Teapot.ini configuration file.
-![LyeEV74](https://github.com/user-attachments/assets/78bd1bef-69aa-4ad8-8d33-4e330c6d6c11)
+Teapot-Tool will automatically update your device with the latest up to date Teapot.ini configuration file.<br>
 
+![oXistqJ](https://github.com/user-attachments/assets/43954187-0d80-4157-98e7-8a87f0ab2a19)
+
+![LyeEV74](https://github.com/user-attachments/assets/78bd1bef-69aa-4ad8-8d33-4e330c6d6c11)
 <br><br>
 ![jiy2GYR](https://github.com/user-attachments/assets/61c9fff2-9117-4ac0-88f7-d694a0f75788)
