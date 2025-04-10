@@ -57,7 +57,7 @@ namespace TeapotInstaller
             this.metroLabel1.Name = "metroLabel1";
             this.metroLabel1.Size = new System.Drawing.Size(228, 19);
             this.metroLabel1.TabIndex = 0;
-            this.metroLabel1.Text = "Teapot Tool and Installer - v2.0.0";
+            this.metroLabel1.Text = "Teapot Tool and Installer - v2.3.0";
             this.metroLabel1.Click += new System.EventHandler(this.metroLabel1_Click);
             // 
             // lblLine

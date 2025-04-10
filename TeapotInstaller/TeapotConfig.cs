@@ -33,7 +33,7 @@ namespace TeapotInstaller
         private void UpdateConfigFile()
         {
             
-            DialogResult msgResult = MessageBox.Show("Would you like to update it now?", "Teapot Installer - You have an outdated Teapot.ini", MessageBoxButtons.YesNo);
+            DialogResult msgResult = MessageBox.Show("Would you like to update it now?!", "Teapot Installer - You have an outdated Teapot.ini", MessageBoxButtons.YesNo);
             if (msgResult == DialogResult.Yes){
                 downloader = new Downloader("Teapot.ini");
                 if (downloader.S_SUCCESS){
@@ -51,40 +51,38 @@ namespace TeapotInstaller
                 CurDevice.Handle.ReceiveFile($"{Definitions.STR_TEMPPATHDAT}\\Teapot.ini", $"{Definitions.STR_HDD}Teapot.ini");
 
                 string ConfigVersion = MyIni.Read("ConfigVersion", "Diagnostic");
-                if (string.IsNullOrEmpty(ConfigVersion) || ConfigVersion != "2.0.7")
+                if (string.IsNullOrEmpty(ConfigVersion) || ConfigVersion != "2.0.9")
                 {
                     UpdateConfigFile();
-                    this.Close();
+                    try
+                    {
+                        this.Hide();
+                    }
+                    catch (Exception e) { }
                     return;
                 }
 
-                Console.WriteLine($"Config file version: {ConfigVersion}");
-                
-                rbNoKVMode.Checked = bool.Parse(MyIni.Read("NoKVMode", "Settings"));
-                rbNandKV.Checked = bool.Parse(MyIni.Read("UseNandKV", "Settings"));
-                cbOffline.Checked = bool.Parse(MyIni.Read("Offline", "Settings"));
-                cbUI.Checked = bool.Parse(MyIni.Read("CustomUI", "Settings"));
-                cbEngine.Checked = bool.Parse(MyIni.Read("TeapotEngine", "Settings"));
-                cbLegacyEngines.Checked = bool.Parse(MyIni.Read("LegacyEngines", "Settings"));
-                cbOnHost.Checked = bool.Parse(MyIni.Read("OnhostMenus", "Settings"));
 
                 rbNoKVMode.Checked = bool.Parse(MyIni.Read("NoKVMode", "Settings"));
                 rbNandKV.Checked = bool.Parse(MyIni.Read("UseNandKV", "Settings"));
                 cbOffline.Checked = bool.Parse(MyIni.Read("Offline", "Settings"));
                 cbUI.Checked = bool.Parse(MyIni.Read("CustomUI", "Settings"));
+                cbStealthNetwork.Checked = bool.Parse(MyIni.Read("StealthNetwork", "settings"));
                 cbEngine.Checked = bool.Parse(MyIni.Read("TeapotEngine", "Settings"));
-                cbLegacyEngines.Checked = bool.Parse(MyIni.Read("LegacyEngines", "Settings"));
-                cbOnHost.Checked = bool.Parse(MyIni.Read("OnhostMenus", "Settings"));
+                cbLegacyEngines.Checked = bool.Parse(MyIni.Read("LoadOldLegacyCheats", "Settings"));
+                cbOnHost.Checked = bool.Parse(MyIni.Read("OnHostCheats", "Settings"));
+                cbAchievementUnlocker.Checked = bool.Parse(MyIni.Read("UseAchievementUnlocker", "Settings"));
 
                 cbBypassAW.Checked = bool.Parse(MyIni.Read("AdvancedWarfare", "Bypasses"));
                 cbBypassGhosts.Checked = bool.Parse(MyIni.Read("Ghosts", "Bypasses"));
                 cbBypassBo2.Checked = bool.Parse(MyIni.Read("Bo2", "Bypasses"));
                 cbBypassBo3.Checked = bool.Parse(MyIni.Read("Bo3", "Bypasses"));
 
-                int FanSpeed = int.Parse(MyIni.Read("Fanspeed", "Settings"));
+                decimal FanSpeed = decimal.Parse(MyIni.Read("Fanspeed", "Settings"));
                 valFanSpeed.Value = FanSpeed < 50 ? 50 : FanSpeed;
 
-            }catch (Exception ex){
+            }
+            catch (Exception ex){
                 UpdateConfigFile();
 
             }
@@ -106,10 +104,12 @@ namespace TeapotInstaller
             MyIni.Write("UseNandKV", " " + rbNandKV.Checked.ToString().ToLower(), "Settings");
             MyIni.Write("TeapotEngine", " " + cbEngine.Checked.ToString().ToLower(), "Settings");
             MyIni.Write("CustomUI", " " + cbUI.Checked.ToString().ToLower(), "Settings");
+            MyIni.Write("StealthNetwork", " " + cbStealthNetwork.Checked.ToString().ToLower(), "Settings");
             MyIni.Write("Offline", " " + cbOffline.Checked.ToString().ToLower(), "Settings");
             MyIni.Write("Fanspeed", " " + valFanSpeed.Value.ToString().ToLower(), "Settings");
-            MyIni.Write("LegacyEngines", " " + cbLegacyEngines.Checked.ToString().ToLower(), "Settings");
-            MyIni.Write("OnhostMenus", " " + cbOnHost.Checked.ToString().ToLower(), "Settings");
+            MyIni.Write("LoadOldLegacyCheats", " " + cbLegacyEngines.Checked.ToString().ToLower(), "Settings");
+            MyIni.Write("OnHostCheats", " " + cbOnHost.Checked.ToString().ToLower(), "Settings");
+            MyIni.Write("UseAchievementUnlocker", " " + cbAchievementUnlocker.Checked.ToString().ToLower(), "Settings");
 
             MyIni.Write("AdvancedWarfare", " " + cbBypassAW.Checked.ToString().ToLower(), "Bypasses");
             MyIni.Write("Ghosts", " " + cbBypassGhosts.Checked.ToString().ToLower(), "Bypasses");
@@ -201,6 +201,26 @@ namespace TeapotInstaller
         }
 
         private void cbNoKVMode_CheckedChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void cbEngine_CheckedChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void cbOnHost_CheckedChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void cbLegacyEngines_CheckedChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void cbAchievementUnlocker_CheckedChanged(object sender, EventArgs e)
         {
 
         }

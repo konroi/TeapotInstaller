@@ -36,6 +36,8 @@
             this.rbYourKV = new MetroFramework.Controls.MetroRadioButton();
             this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.cbStealthNetwork = new MetroFramework.Controls.MetroCheckBox();
+            this.cbAchievementUnlocker = new MetroFramework.Controls.MetroCheckBox();
             this.cbUI = new MetroFramework.Controls.MetroCheckBox();
             this.cbOffline = new MetroFramework.Controls.MetroCheckBox();
             this.cbOnHost = new MetroFramework.Controls.MetroCheckBox();
@@ -132,6 +134,8 @@
             // 
             // groupBox2
             // 
+            this.groupBox2.Controls.Add(this.cbStealthNetwork);
+            this.groupBox2.Controls.Add(this.cbAchievementUnlocker);
             this.groupBox2.Controls.Add(this.cbUI);
             this.groupBox2.Controls.Add(this.cbOffline);
             this.groupBox2.Controls.Add(this.cbOnHost);
@@ -140,11 +144,36 @@
             this.groupBox2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.groupBox2.Location = new System.Drawing.Point(12, 153);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(290, 145);
+            this.groupBox2.Size = new System.Drawing.Size(290, 201);
             this.groupBox2.TabIndex = 33;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Teapot / Engine Settings";
             this.groupBox2.Enter += new System.EventHandler(this.groupBox2_Enter);
+            // 
+            // cbStealthNetwork
+            // 
+            this.cbStealthNetwork.AutoSize = true;
+            this.cbStealthNetwork.FontSize = MetroFramework.MetroCheckBoxSize.Medium;
+            this.cbStealthNetwork.FontWeight = MetroFramework.MetroCheckBoxWeight.Bold;
+            this.cbStealthNetwork.Location = new System.Drawing.Point(11, 69);
+            this.cbStealthNetwork.Name = "cbStealthNetwork";
+            this.cbStealthNetwork.Size = new System.Drawing.Size(175, 19);
+            this.cbStealthNetwork.TabIndex = 37;
+            this.cbStealthNetwork.Text = "StealthNetwork (SNet)";
+            this.cbStealthNetwork.UseSelectable = true;
+            // 
+            // cbAchievementUnlocker
+            // 
+            this.cbAchievementUnlocker.AutoSize = true;
+            this.cbAchievementUnlocker.FontSize = MetroFramework.MetroCheckBoxSize.Medium;
+            this.cbAchievementUnlocker.FontWeight = MetroFramework.MetroCheckBoxWeight.Bold;
+            this.cbAchievementUnlocker.Location = new System.Drawing.Point(11, 169);
+            this.cbAchievementUnlocker.Name = "cbAchievementUnlocker";
+            this.cbAchievementUnlocker.Size = new System.Drawing.Size(176, 19);
+            this.cbAchievementUnlocker.TabIndex = 36;
+            this.cbAchievementUnlocker.Text = "Achievement Unlocker";
+            this.cbAchievementUnlocker.UseSelectable = true;
+            this.cbAchievementUnlocker.CheckedChanged += new System.EventHandler(this.cbAchievementUnlocker_CheckedChanged);
             // 
             // cbUI
             // 
@@ -175,36 +204,39 @@
             this.cbOnHost.AutoSize = true;
             this.cbOnHost.FontSize = MetroFramework.MetroCheckBoxSize.Medium;
             this.cbOnHost.FontWeight = MetroFramework.MetroCheckBoxWeight.Bold;
-            this.cbOnHost.Location = new System.Drawing.Point(11, 119);
+            this.cbOnHost.Location = new System.Drawing.Point(11, 144);
             this.cbOnHost.Name = "cbOnHost";
             this.cbOnHost.Size = new System.Drawing.Size(128, 19);
             this.cbOnHost.TabIndex = 33;
             this.cbOnHost.Text = "On-Host Menus";
             this.cbOnHost.UseSelectable = true;
+            this.cbOnHost.CheckedChanged += new System.EventHandler(this.cbOnHost_CheckedChanged);
             // 
             // cbLegacyEngines
             // 
             this.cbLegacyEngines.AutoSize = true;
             this.cbLegacyEngines.FontSize = MetroFramework.MetroCheckBoxSize.Medium;
             this.cbLegacyEngines.FontWeight = MetroFramework.MetroCheckBoxWeight.Bold;
-            this.cbLegacyEngines.Location = new System.Drawing.Point(11, 94);
+            this.cbLegacyEngines.Location = new System.Drawing.Point(10, 119);
             this.cbLegacyEngines.Name = "cbLegacyEngines";
             this.cbLegacyEngines.Size = new System.Drawing.Size(126, 19);
             this.cbLegacyEngines.TabIndex = 32;
             this.cbLegacyEngines.Text = "Legacy Engines";
             this.cbLegacyEngines.UseSelectable = true;
+            this.cbLegacyEngines.CheckedChanged += new System.EventHandler(this.cbLegacyEngines_CheckedChanged);
             // 
             // cbEngine
             // 
             this.cbEngine.AutoSize = true;
             this.cbEngine.FontSize = MetroFramework.MetroCheckBoxSize.Medium;
             this.cbEngine.FontWeight = MetroFramework.MetroCheckBoxWeight.Bold;
-            this.cbEngine.Location = new System.Drawing.Point(11, 69);
+            this.cbEngine.Location = new System.Drawing.Point(11, 94);
             this.cbEngine.Name = "cbEngine";
             this.cbEngine.Size = new System.Drawing.Size(119, 19);
             this.cbEngine.TabIndex = 31;
             this.cbEngine.Text = "Teapot Engine";
             this.cbEngine.UseSelectable = true;
+            this.cbEngine.CheckedChanged += new System.EventHandler(this.cbEngine_CheckedChanged);
             // 
             // groupBox3
             // 
@@ -213,7 +245,7 @@
             this.groupBox3.Controls.Add(this.cbBypassGhosts);
             this.groupBox3.Controls.Add(this.cbBypassBo3);
             this.groupBox3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.groupBox3.Location = new System.Drawing.Point(12, 304);
+            this.groupBox3.Location = new System.Drawing.Point(12, 360);
             this.groupBox3.Name = "groupBox3";
             this.groupBox3.Size = new System.Drawing.Size(290, 119);
             this.groupBox3.TabIndex = 36;
@@ -271,7 +303,7 @@
             // 
             // valFanSpeed
             // 
-            this.valFanSpeed.Location = new System.Drawing.Point(93, 436);
+            this.valFanSpeed.Location = new System.Drawing.Point(94, 483);
             this.valFanSpeed.Minimum = new decimal(new int[] {
             50,
             0,
@@ -291,7 +323,7 @@
             // 
             this.lblfanspeed.AutoSize = true;
             this.lblfanspeed.FontWeight = MetroFramework.MetroLabelWeight.Bold;
-            this.lblfanspeed.Location = new System.Drawing.Point(12, 435);
+            this.lblfanspeed.Location = new System.Drawing.Point(12, 482);
             this.lblfanspeed.Name = "lblfanspeed";
             this.lblfanspeed.Size = new System.Drawing.Size(82, 19);
             this.lblfanspeed.TabIndex = 38;
@@ -303,7 +335,7 @@
             this.btnSave.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             this.btnSave.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnSave.ForeColor = System.Drawing.Color.Black;
-            this.btnSave.Location = new System.Drawing.Point(13, 473);
+            this.btnSave.Location = new System.Drawing.Point(13, 520);
             this.btnSave.Name = "btnSave";
             this.btnSave.Size = new System.Drawing.Size(59, 23);
             this.btnSave.TabIndex = 40;
@@ -316,7 +348,7 @@
             this.btnCancel.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             this.btnCancel.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnCancel.ForeColor = System.Drawing.Color.Black;
-            this.btnCancel.Location = new System.Drawing.Point(78, 473);
+            this.btnCancel.Location = new System.Drawing.Point(78, 520);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(59, 23);
             this.btnCancel.TabIndex = 41;
@@ -329,7 +361,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoValidate = System.Windows.Forms.AutoValidate.EnablePreventFocusChange;
-            this.ClientSize = new System.Drawing.Size(317, 512);
+            this.ClientSize = new System.Drawing.Size(317, 560);
             this.Controls.Add(this.btnCancel);
             this.Controls.Add(this.btnSave);
             this.Controls.Add(this.lblfanspeed);
@@ -339,8 +371,8 @@
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.metroLabel3);
             this.Controls.Add(this.metroLabel4);
-            this.MaximumSize = new System.Drawing.Size(317, 512);
-            this.MinimumSize = new System.Drawing.Size(317, 512);
+            this.MaximumSize = new System.Drawing.Size(317, 560);
+            this.MinimumSize = new System.Drawing.Size(317, 560);
             this.Name = "TeapotConfig";
             this.Text = "                                                                                 " +
     "                                                ";
@@ -380,5 +412,7 @@
         private MetroFramework.Controls.MetroRadioButton rbYourKV;
         private MetroFramework.Controls.MetroRadioButton rbNoKVMode;
         private MetroFramework.Controls.MetroRadioButton rbNandKV;
+        private MetroFramework.Controls.MetroCheckBox cbAchievementUnlocker;
+        private MetroFramework.Controls.MetroCheckBox cbStealthNetwork;
     }
 }
