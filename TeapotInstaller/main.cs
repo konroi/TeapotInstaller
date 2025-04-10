@@ -210,7 +210,11 @@ namespace TeapotInstaller
 
         private void btnTpConfig_Click(object sender, EventArgs e)
         {
-            new TeapotConfig(CurDevice).Show();
+            try
+            {
+                new TeapotConfig(CurDevice).Show();
+            }
+            catch (Exception ex) { }
         }
 
         public async void Reboot()
