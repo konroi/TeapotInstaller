@@ -3,7 +3,7 @@ This tool grabs the latest download contents from our webserver, so it is automa
 This uses **ilmerge** to pack everything into a single executable "Teapot-Tool.exe" (This may cause false AV flags)
 
 I will add the latest compiled executable to the repo (Last Built: 04/10/2025)
-
+<br>
 **Permanent Download:** https://TeapotLive.net/Installer
 
 **How to Use:**
